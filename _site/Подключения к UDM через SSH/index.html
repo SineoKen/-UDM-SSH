@@ -4,72 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Подключения к UDM через SSH</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        main {
+            background-color: #1e1e1e;
+            color: white;
+            width: 800px; /* Ширина как у страницы A4 */
+            padding: 20px 40px;
+            margin: 40px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            line-height: 1.6;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p, ol, code, .note {
+            margin-bottom: 20px;
+        }
+
+        .note {
+            background-color: #2a3a4b; /* Темный синий фон */
+            color: #e6e8eb; /* Светлый текст */
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        code {
+            background-color: #333333;
+            color: #ce2323;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        pre {
+            background-color: #333333;
+            color: #bd1e1e;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        ol {
+            padding-left: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Подключения к UDM через SSH</h1>
     <main>
+        <h1>Подключения к UDM через SSH</h1>
         <p>Здесь описание, как подключиться к UDM через SSH.<br>
-Эта инструкция будет преобразована в HTML Eleventy.
-Пошаговая инструкция по подключению к UniFi Dream Machine (UDM) через SSH и просмотру логов для самой UDM и подключённых к ней точек доступа.</p>
-<blockquote>
-<p><strong>Примечание
-Устройство, с которого вы получаете доступ, должно находиться в той же локальной сети, что и устройство, к которому вы подключаетесь. Возможно подключение к локальной сети по VPN-туннелю. Если с подключением наблюдаются ошибки, попробуйте подключить ваше терминальное устройство по Ethernet непосредственно к порту LAN управляемого устройства.</strong></p>
-</blockquote>
-<h6><strong>Подключение к UDM по SSH</strong></h6>
-<ol>
-<li>
-<p>IP udm 192.168.1.1</p>
-</li>
-<li>
-<p>Подключение к UDM через SSH:
-Открою терминал на компьютере.PowerShell или Командная строка.
-Использую команду SSH, чтобы подключиться, заменив <strong>&lt;IP_UDM&gt;</strong> на <strong>IP-адрес UDM</strong>:</p>
-</li>
-</ol>
-<p>Синтаксис команды подключения по SSH:</p>
-<p><code>ssh &lt;username&gt;@&lt;ip-address&gt; [-p &lt;port&gt;]</code></p>
-<p>Пример:</p>
-<p><code>ssh root@192.168.1.1 -p 1122</code></p>
-<p>Введите пароль, когда будет предложено.</p>
-<blockquote>
-<p>**Примечание
-Порт который используется для SSH (по умолчанию это 22) если порт не изменен команда подключения будет выглядеть так: <code>ssh username@ip_address</code></p>
-</blockquote>
-<ol start="3">
-<li><strong>Переход к логам UDM</strong></li>
-</ol>
-<p><strong>Logs</strong> находятся в директории <code>/var/log</code>. Например, для просмотра основного системного лога использую команду:</p>
-<p><code>tail -f /var/log/messages</code></p>
-<p>Эта команда покажет обновления логов в реальном времени.
-Чтобы выйти, нажмите <strong>Ctrl + C.</strong></p>
-<h6><strong>Просмотр логов определённой точки доступа, подключённой к UDM</strong></h6>
-<ol>
-<li>
-<p>Определите <strong>IP-адрес</strong> точки доступа: В UniFi Controller найдите устройство (точку доступа), подключённое к UDM, и посмотри его IP-адрес.</p>
-</li>
-<li>
-<p>Подключись к точке доступа по SSH:</p>
-</li>
-</ol>
-<p>В терминале введите команду, заменив <strong>&lt;IP_AP&gt;</strong> на <strong>IP-адрес</strong> точки доступа:</p>
-<p><code>ssh &lt;username&gt;@&lt;IP_AP&gt;</code></p>
-<p>После ввода пароля вы будете подключены к точке доступа.</p>
-<ol start="3">
-<li>Перейдите к логам точки доступа:</li>
-</ol>
-<p>Обычно Logs на точке доступа также находятся в директории <code>/var/log</code>.</p>
-<p>Например, для просмотра журнала событий точки доступа используй:</p>
-<p><code>tail -f /var/log/messages</code></p>
-<p>Это позволит просматривать журнал в реальном времени.</p>
-<blockquote>
-<p>**Примечание
-Пользователь по умолчанию: В состоянии поставки используются следующие пары логин/пароль:</p>
-<ul>
-<li>консоли и шлюзы UniFi — <em>root:ui</em> (<em>root:ubnt</em> на старых версиях);</li>
-<li>прочие устройства UniFi — <em>ui:ui</em> (<em>ubnt:ubnt</em> на старых версиях)..</li>
-</ul>
-</blockquote>
+        Пошаговая инструкция по подключению к UniFi Dream Machine (UDM) через SSH и просмотру логов для самой UDM и подключённых к ней точек доступа.</p>
 
+        <div class="note">
+            <strong>Примечание:</strong><br>
+            Устройство, с которого вы получаете доступ, должно находиться в той же локальной сети, что и устройство, к которому вы подключаетесь. Возможно подключение к локальной сети по VPN-туннелю. Если с подключением наблюдаются ошибки, попробуйте подключить ваше терминальное устройство по Ethernet непосредственно к порту LAN управляемого устройства.
+        </div>
+
+        <ol>
+            <li>
+                IP udm 192.168.1.1
+            </li>
+            <li>
+                Подключение к UDM через SSH: Откройте терминал на компьютере (PowerShell или Командная строка). Используйте команду SSH, чтобы подключиться, заменив <strong>&lt;IP_UDM&gt;</strong> на <strong>IP-адрес UDM</strong>:
+            </li>
+        </ol>
+        <p>Синтаксис команды подключения по SSH:</p>
+        <pre><code>ssh &lt;username&gt;@&lt;ip-address&gt; [-p &lt;port&gt;]</code></pre>
+
+        <p>Пример:</p>
+        <pre><code>ssh root@192.168.1.1 -p 1122</code></pre>
+        <p>Введите пароль, когда будет предложено.</p>
+
+        <div class="note">
+            <strong>Примечание:</strong><br>
+            Порт, который используется для SSH (по умолчанию это 22). Если порт не изменён, команда подключения будет выглядеть так: 
+            <code>ssh username@ip_address</code>
+        </div>
+
+        <ol start="3">
+            <li><strong>Переход к логам UDM</strong></li>
+        </ol>
+        <p><strong>Logs</strong> находятся в директории <code>/var/log</code>. Например, для просмотра основного системного лога использую команду:</p>
+        <pre><code>tail -f /var/log/messages</code></pre>
+        <p>Эта команда покажет обновления логов в реальном времени. Чтобы выйти, нажмите <strong>Ctrl + C.</strong></p>
+
+        <h2>Просмотр логов определённой точки доступа, подключённой к UDM</h2>
+        <ol>
+            <li>
+                Определите <strong>IP-адрес</strong> точки доступа: В UniFi Controller найдите устройство (точку доступа), подключённое к UDM, и посмотрите его IP-адрес.
+            </li>
+            <li>
+                Подключитесь к точке доступа по SSH:
+            </li>
+        </ol>
+        <p>В терминале введите команду, заменив <strong>&lt;IP_AP&gt;</strong> на <strong>IP-адрес</strong> точки доступа:</p>
+        <pre><code>ssh &lt;username&gt;@&lt;IP_AP&gt;</code></pre>
+        <p>После ввода пароля вы будете подключены к точке доступа.</p>
+        <ol start="3">
+            <li>Перейдите к логам точки доступа:</li>
+        </ol>
+        <p>Обычно Logs на точке доступа также находятся в директории <code>/var/log</code>.</p>
+        <p>Например, для просмотра журнала событий точки доступа используй:</p>
+        <pre><code>tail -f /var/log/messages</code></pre>
+        <p>Это позволит просматривать журнал в реальном времени.</p>
+
+        <div class="note">
+            <strong>Примечание:</strong><br>
+            Пользователь по умолчанию: В состоянии поставки используются следующие пары логин/пароль:
+            <ul>
+                <li>консоли и шлюзы UniFi — <em>root:ui</em> (<em>root:ubnt</em> на старых версиях);</li>
+                <li>прочие устройства UniFi — <em>ui:ui</em> (<em>ubnt:ubnt</em> на старых версиях).</li>
+            </ul>
+        </div>
     </main>
 </body>
 </html>
